@@ -1,0 +1,44 @@
+#Test 1 Tests everything depends on everything
+#| Output should be:
+Dependency Graph
+R0:R0,R1,R2,R3
+R1:R0,R1,R2,R3
+R2:R0,R1,R2,R3
+R3:R0,R1,R2,R3
+Reverse Dependency Graph
+R0:R0,R1,R2,R3
+R1:R0,R1,R2,R3
+R2:R0,R1,R2,R3
+R3:R0,R1,R2,R3
+Strongly Connected Components :
+{R0,R1,R2,R3,}
+
+|#
+
+Schemes:
+A(a,b,c,d,e)
+
+
+Facts:
+A('a','b','c','d','e').
+# Comment the next fact to half the size
+# A('f','g','h','i','j').
+
+
+#|remove to create 11E5 facts (maybe)
+A('a','b','c','f','g').
+A('a','b','c','h','i').
+A('a','b','c','j','k').
+|#
+
+Rules:
+A(a,b,c,d,e) :- A(e,d,c,b,a).
+A(a,b,c,f,g) :- A(a,b,c,d,e),A(e,d,c,f,g).
+A(a,b,c,d,e) :- A(b,c,d,e,a).
+A(a,b,c,d,e) :- A(b,a,c,d,e).
+
+
+
+
+Queries:
+A(a,b,c,d,e)?
